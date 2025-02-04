@@ -52,7 +52,7 @@ def shortenUrl():
     db.session.add(new_url)
     db.session.commit()
 
-    return jsonify({"short_url": f"http://127.0.0.1:5000/{short_url}"})
+    return jsonify({"short_url": f"http://request.host_url/{short_url}"})
 
 # handle all other requests as a short url, and redirect them to longer ones
 @app.route('/<short_url>')
