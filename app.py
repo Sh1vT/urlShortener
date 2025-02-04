@@ -2,6 +2,7 @@
 from flask import Flask, request, redirect, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import random
+import os
 import hashlib
 
 # init flask app with db links and then accessing db with db var
@@ -62,4 +63,5 @@ def redirect_to_long(short_url):
     return jsonify({'error': 'URL Not Found'}), 404
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    port=int(os.environ.get('PORT', 4000))
+    app.run(host='0.0.0.0', port=port)
