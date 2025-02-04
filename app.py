@@ -44,7 +44,7 @@ def shortenUrl():
     # if the url is shortened before, return the shortened url
     existing_url = URL.query.filter_by(long_url=long_url).first()
     if existing_url:
-        return jsonify({'short_url': f'http://127.0.0.1:5000/{existing_url.short_url}'})
+        return jsonify({'short_url': f'{request.host_url}{existing_url.short_url}'})
 
     # if url never shortened, shorten and return
     short_url=generate_short_url(long_url)
@@ -52,7 +52,7 @@ def shortenUrl():
     db.session.add(new_url)
     db.session.commit()
 
-    return jsonify({"short_url": f"http://request.host_url/{short_url}"})
+    return jsonify({"short_url": f"{request.host_url}{short_url}"})
 
 # handle all other requests as a short url, and redirect them to longer ones
 @app.route('/<short_url>')
